@@ -1,0 +1,45 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Ahmet Can\\source\\repos\\ReCapProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1651A5-6714-448C-B972-83BD75096B74}|DataAccess\\DataAccess.csproj|c:\\users\\ahmet can\\source\\repos\\recapproject\\dataaccess\\concrete\\inmemory\\inmemorycardal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1651A5-6714-448C-B972-83BD75096B74}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\concrete\\inmemory\\inmemorycardal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InMemoryCarDal.cs",
+              "DocumentMoniker": "C:\\Users\\Ahmet Can\\source\\repos\\ReCapProject\\DataAccess\\Concrete\\InMemory\\InMemoryCarDal.cs",
+              "RelativeDocumentMoniker": "DataAccess\\Concrete\\InMemory\\InMemoryCarDal.cs",
+              "ToolTip": "C:\\Users\\Ahmet Can\\source\\repos\\ReCapProject\\DataAccess\\Concrete\\InMemory\\InMemoryCarDal.cs",
+              "RelativeToolTip": "DataAccess\\Concrete\\InMemory\\InMemoryCarDal.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAB8AAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T09:50:21.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
