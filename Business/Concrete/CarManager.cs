@@ -14,14 +14,14 @@ namespace Business.Concrete
         ICarDal _carDal;
 
         public CarManager(ICarDal carDal)
-        {
+        { 
             _carDal = carDal;
             
         }
 
         public void Add(Car car)
         {
-            if(car.Description.Length >= 2 && car.DailyPrice > 0 && car.ModelYear<2024)
+            if(car.Description.Length >= 2 && car.DailyPrice > 0)
             {
                 _carDal.Add(car);
             }
