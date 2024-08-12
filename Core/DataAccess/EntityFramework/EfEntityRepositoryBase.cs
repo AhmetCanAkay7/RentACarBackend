@@ -1,5 +1,5 @@
-﻿using Entities.Abstract;
-using Entities.Concrete;
+﻿using Core.DataAccess;
+using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,13 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concrete.EntityFramework
+namespace Core.DataAccess.EntityFramework
 {
-    public class EfEntityRepositoryBase<T,TContext> where T : class,IEntity, new()
-                                                    where TContext:DbContext,new()
+    public class EfEntityRepositoryBase<TEntity,TContext> : IEntityRepository<TEntity>
+                                                      where TEntity : class,IEntity, new()
+                                                      where TContext:DbContext,new()
     {
-        public void Add(T entity)
+        public void Insert(TEntity entity)
         {
             using (TContext context = new TContext())
             {
@@ -24,7 +25,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public void Delete(T entity)
+        public void Delete(TEntity entity)
         {
             using (TContext context = new TContext())
             {
@@ -35,25 +36,25 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public List<T> GetAll(Expression<Func<T, bool>> filter = null)
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
             using (TContext context = new TContext())
             {
-                return filter == null ? context.Set<T>().ToList() : context.Set<T>().Where(filter).ToList();
+                return filter == null ? context.Set<TEntity>().ToList() : context.Set<TEntity>().Where(filter).ToList();
 
             }
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             using (TContext context = new TContext())
             {
-                return context.Set<T>().SingleOrDefault(filter);
+                return context.Set<TEntity>().SingleOrDefault(filter);
 
             }
         }
 
-        public void Update(T entity)
+        public void Update(TEntity entity)
         {
             using (TContext context = new TContext())
             {

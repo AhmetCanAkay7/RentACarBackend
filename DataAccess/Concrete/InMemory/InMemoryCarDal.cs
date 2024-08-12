@@ -22,7 +22,7 @@ namespace DataAccess.Concrete.InMemoryCarDal
         _cars.Add(new Car {Description="Mercedes", BrandId=3, ColorId=1, DailyPrice= 4000000, ModelYear=2016, Id=5}); 
 
         }
-        public void Add(Car car)
+        public void Insert(Car car)
         {
             foreach (var c in _cars)
             {
