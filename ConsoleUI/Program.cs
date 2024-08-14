@@ -24,34 +24,50 @@ namespace ConsoleUI
             //Getting error here because of business layer rules.
             //InsertCarTest(carManager);
 
-            var result1 = carManager.GetCarDetailsDtos();
-            foreach (var carDto in result1)
+            //CarDtoTest(carManager);
+
+            var result2 = carManager.GetAll();
+            if (result2.IsSuccess)
             {
-                Console.WriteLine(carDto.CarName + " : " + carDto.BrandName + " : " + carDto.ColorName + " : " + carDto.DailyPrice);
+                foreach (var car in result2.Data)
+                {
+                    Console.WriteLine(car.Description);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result2.Message);
             }
 
             Console.ReadLine();
+        }
 
-
+        private static void CarDtoTest(CarManager carManager)
+        {
+            var result1 = carManager.GetCarDetailsDtos();
+            foreach (var carDto in result1.Data)
+            {
+                Console.WriteLine(carDto.CarName + " : " + carDto.BrandName + " : " + carDto.ColorName + " : " + carDto.DailyPrice);
+            }
         }
 
         private static void ColorUpdateTest(ColorManager colorManager)
         {
-            Color colorToUpdate = colorManager.GetById(5);
+            Color colorToUpdate = colorManager.GetById(5).Data;
             colorToUpdate.ColorName = "pink";
             colorManager.Update(colorToUpdate);
         }
 
         private static void BrandUpdateTest(BrandManager brandManager)
         {
-            Brand brandToUpdate = brandManager.GetById(5);
+            Brand brandToUpdate = brandManager.GetById(5).Data;
             brandToUpdate.BrandName = "Ford";
             brandManager.Update(brandToUpdate);
         }
 
         private static void CarUpdateTest(CarManager carManager)
         {
-            Car carToUpdate = carManager.GetById(1);
+            Car carToUpdate = carManager.GetById(1).Data;
             carToUpdate.BrandId = 1;
             carToUpdate.ColorId = 1;
             carToUpdate.ModelYear = 2023;
@@ -67,7 +83,7 @@ namespace ConsoleUI
 
         private static void GetCarsTest(CarManager carManager)
         {
-            foreach (var car in carManager.GetCarsByBrandId(1))
+            foreach (var car in carManager.GetCarsByBrandId(1).Data)
             {
                 System.Console.WriteLine(car.Description);
             }

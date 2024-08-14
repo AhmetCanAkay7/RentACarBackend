@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +77,11 @@ namespace DataAccess.Concrete.InMemoryCarDal
             carToUpdate.BrandId = car.BrandId;
             _cars[i] = carToUpdate;
 
+        }
+
+        public List<CarDetailsDto> GetCarDetailsDtos()
+        {
+            throw new NotImplementedException();
         }
     }
 }
