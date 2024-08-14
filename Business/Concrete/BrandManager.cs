@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,29 +20,45 @@ namespace Business.Concrete
         {
             _brandDal = brandDal;
         }
-        public void Delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
-            _brandDal.Delete(brand);
+           if(brand.BrandName.Length < 3)
+            {
+                return new ErrorResult("Brand could not be deleted");
+            }
+           _brandDal.Delete(brand);
+            return new SuccessResult("Brand is deleted!");
         }
 
-        public List<Brand> GetAll()
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.GetAll();
+           return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),"Brands are listed.");
         }
 
-        public Brand GetById(int brandId)
+        public IDataResult<Brand> GetById(int brandId)
         {
-            return _brandDal.Get(b=> b.BrandId==brandId);
+            return new SuccessDataResult<Brand>(_brandDal.Get(b=>b.BrandId==brandId),"This is the brand.");
         }
 
-        public void Insert(Brand brand)
+        public IResult Insert(Brand brand)
         {
+            if(brand.BrandName.Length>3 && brand.BrandName.EndsWith('a'))
+            {
             _brandDal.Insert(brand);
+                return new SuccessResult("Brand was inserted.");
+            }
+            return new ErrorResult("Brand could not be inserted.");
         }
 
-        public void Update(Brand brand)
+        public IResult Update(Brand brand)
         {
-            _brandDal.Update(brand);
+            if(DateTime.Now.Hour != 22)
+            {
+                _brandDal.Update(brand);
+                return new SuccessResult("Brand was updated.");
+            }
+            return new ErrorResult(Messages.MaintenanceTime);
+            
         }
     }
 }

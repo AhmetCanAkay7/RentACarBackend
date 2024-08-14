@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -19,29 +22,44 @@ namespace Business.Concrete
         }
 
 
-        public void Delete(Color color)
+        public IResult Delete(Color color)
         {
+            if (color.ColorName.Length < 3)
+            {
+                return new ErrorResult("Color could not be deleted");
+            }
             _colorDal.Delete(color);
+            return new SuccessResult("Color is deleted!");
         }
 
-        public List<Color> GetAll()
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorDal.GetAll();
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), "Colors are listed.");
         }
 
-        public Color GetById(int colorId)
+        public IDataResult<Color> GetById(int colorId)
         {
-            return _colorDal.Get(c=> c.ColorId== colorId);
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorId), "This is the desired color.");
         }
 
-        public void Insert(Color color)
+        public IResult Insert(Color color)
         {
+            if (color.ColorName.Length > 3 && color.ColorName.EndsWith('a'))
+            {
+                return new ErrorResult("Color could not be inserted.");
+            }
             _colorDal.Insert(color);
+            return new SuccessResult("Color is inserted.");
         }
 
-        public void Update(Color color)
+        public IResult Update(Color color)
         {
-            _colorDal.Update(color);
+            if (DateTime.Now.Hour != 22)
+            {
+                _colorDal.Update(color);
+                return new SuccessResult("Color was updated.");
+            }
+            return new ErrorResult(Messages.MaintenanceTime);
         }
     }
 }
