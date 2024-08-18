@@ -15,6 +15,9 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+
             //CarUpdateTest(carManager);
             //BrandUpdateTest(brandManager);
             //ColorUpdateTest(colorManager);
@@ -26,6 +29,36 @@ namespace ConsoleUI
 
             //CarDtoTest(carManager);
 
+            //ResultTest(carManager);
+
+            Rental rental = new Rental { RentalId = 1, CarId = 1, CustomerId = 1, RentDate = new DateTime(2023, 10, 1), ReturnDate = new DateTime(2023, 10, 2) };
+
+            // RentalInsertTest(rentalManager, rental);
+
+            var result = rentalManager.GetAll();
+            if (result.IsSuccess)
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
+        }
+
+        private static void RentalInsertTest(RentalManager rentalManager, Rental rental)
+        {
+            var result = rentalManager.Insert(rental);
+            if (result.IsSuccess)
+            {
+                Console.WriteLine("Rental oluşturuldu.");
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+
+        private static void ResultTest(CarManager carManager)
+        {
             var result2 = carManager.GetAll();
             if (result2.IsSuccess)
             {
@@ -38,8 +71,6 @@ namespace ConsoleUI
             {
                 Console.WriteLine(result2.Message);
             }
-
-            Console.ReadLine();
         }
 
         private static void CarDtoTest(CarManager carManager)

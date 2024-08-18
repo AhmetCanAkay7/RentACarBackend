@@ -24,15 +24,15 @@ namespace Business.Concrete
         {
            if(brand.BrandName.Length < 3)
             {
-                return new ErrorResult("Brand could not be deleted");
+                return new ErrorResult(Messages<Brand>.EntityNotDeleted);
             }
            _brandDal.Delete(brand);
-            return new SuccessResult("Brand is deleted!");
+            return new SuccessResult(Messages<Brand>.EntityDeleted);
         }
 
         public IDataResult<List<Brand>> GetAll()
         {
-           return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),"Brands are listed.");
+           return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages<Brand>.EntityListed);
         }
 
         public IDataResult<Brand> GetById(int brandId)
@@ -45,9 +45,9 @@ namespace Business.Concrete
             if(brand.BrandName.Length>3 && brand.BrandName.EndsWith('a'))
             {
             _brandDal.Insert(brand);
-                return new SuccessResult("Brand was inserted.");
+                return new SuccessResult(Messages<Brand>.EntityAdded);
             }
-            return new ErrorResult("Brand could not be inserted.");
+            return new ErrorResult(Messages<Brand>.EntityNotAdded);
         }
 
         public IResult Update(Brand brand)
@@ -55,9 +55,9 @@ namespace Business.Concrete
             if(DateTime.Now.Hour != 22)
             {
                 _brandDal.Update(brand);
-                return new SuccessResult("Brand was updated.");
+                return new SuccessResult(Messages<Brand>.EntityUpdated);
             }
-            return new ErrorResult(Messages.MaintenanceTime);
+            return new ErrorResult(Messages<Brand>.MaintenanceTime);
             
         }
     }

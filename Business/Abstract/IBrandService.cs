@@ -1,4 +1,5 @@
-﻿using Core.Utilities.Results;
+﻿using Core.Business;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -8,15 +9,9 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IBrandService
+    public interface IBrandService : IServiceRepository<Brand>
     {
-        IDataResult<List<Brand>> GetAll();
-
-        IDataResult<Brand> GetById(int brandId);
-
-        IResult Insert(Brand brand);
-        IResult Update(Brand brand);
-        IResult Delete(Brand brand);
+        
 
 
     }

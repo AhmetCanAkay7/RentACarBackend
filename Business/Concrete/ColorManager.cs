@@ -26,30 +26,30 @@ namespace Business.Concrete
         {
             if (color.ColorName.Length < 3)
             {
-                return new ErrorResult("Color could not be deleted");
+                return new ErrorResult(Messages<Color>.EntityNotDeleted);
             }
             _colorDal.Delete(color);
-            return new SuccessResult("Color is deleted!");
+            return new SuccessResult(Messages<Color>.EntityDeleted);
         }
 
         public IDataResult<List<Color>> GetAll()
         {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), "Colors are listed.");
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages<Color>.EntityListed);
         }
 
         public IDataResult<Color> GetById(int colorId)
         {
-            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorId), "This is the desired color.");
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorId), Messages<Color>.EntityListed);
         }
 
         public IResult Insert(Color color)
         {
             if (color.ColorName.Length > 3 && color.ColorName.EndsWith('a'))
             {
-                return new ErrorResult("Color could not be inserted.");
+                return new ErrorResult(Messages<Color>.EntityNotAdded);
             }
             _colorDal.Insert(color);
-            return new SuccessResult("Color is inserted.");
+            return new SuccessResult(Messages<Color>.EntityAdded);
         }
 
         public IResult Update(Color color)
@@ -57,9 +57,9 @@ namespace Business.Concrete
             if (DateTime.Now.Hour != 22)
             {
                 _colorDal.Update(color);
-                return new SuccessResult("Color was updated.");
+                return new SuccessResult(Messages<Color>.EntityUpdated);
             }
-            return new ErrorResult(Messages.MaintenanceTime);
+            return new ErrorResult(Messages<Color>.MaintenanceTime);
         }
     }
 }
