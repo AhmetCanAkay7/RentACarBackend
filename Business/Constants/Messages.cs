@@ -18,5 +18,8 @@ namespace Business.Constants
         public static string MaintenanceTime = "We are in Maintenance time!";
         public static string EntityListed = $"{typeof(T).Name}'s are listed!";
         public static string EntityNotListed = $"{typeof(T).Name}'s could not be listed!";
+        internal static string CarNameAlreadyExists = "Car Name Already exists.";
+        internal static string CarCountOfBrandError="Bir markanın en fazla 10 adet arabası olabilir.";
+        internal static string CarImagesLimitExceeded="Bir arabanın en fazla 5 resmi olabilir.";
     }
 }

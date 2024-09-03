@@ -29,7 +29,7 @@ namespace Business.Concrete
         {
            if (_userDal == null)
             {
-                return new ErrorDataResult<List<User>>(_userDal.GetAll());
+                return new ErrorDataResult<List<User>>(Messages<User>.EntityNotListed);
             }
             else
             {
