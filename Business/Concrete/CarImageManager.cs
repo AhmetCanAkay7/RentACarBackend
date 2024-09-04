@@ -7,6 +7,7 @@ using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,6 @@ namespace Business.Concrete
         {
             _carImageDal = carImageDal;
             _fileHelper = fileHelper;
-        }
-        public IResult Delete(CarImage carImage)
-        {
-            _fileHelper.Delete(PathConstant.ImagesPath + carImage.ImagePath);
-            _carImageDal.Delete(carImage);
-            return new SuccessResult(Messages<CarImage>.EntityDeleted);
         }
 
         public IDataResult<List<CarImage>> GetAll()
@@ -53,6 +48,13 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(GetDefaultImage(carId).Data);
         }
 
+        public IDataResult<List<CarImageDetailsDto>> GetCarImagesDetail()
+        {
+            return new SuccessDataResult<List<CarImageDetailsDto>>(_carImageDal.GetCarImageDetailsDto());
+        }
+
+
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Insert(IFormFile formFile, CarImage carImage)
         {
             var result = BusinessRules.Run(CheckCarImageLimit(carImage.CarId));
@@ -67,6 +69,13 @@ namespace Business.Concrete
 
         }
 
+        public IResult Delete(CarImage carImage)
+        {
+            _fileHelper.Delete(PathConstant.ImagesPath + carImage.ImagePath);
+            _carImageDal.Delete(carImage);
+            return new SuccessResult(Messages<CarImage>.EntityDeleted);
+        }
+
         public IResult Update(IFormFile formFile, CarImage carImage)
         {
             var result = BusinessRules.Run(CheckCarImageLimit(carImage.CarId), DeleteOldImage(carImage.ImageId, carImage.ImagePath));
@@ -78,6 +87,8 @@ namespace Business.Concrete
             _carImageDal.Update(carImage);
             return new SuccessResult(Messages<CarImage>.EntityUpdated);
         }
+
+       
 
         #region Business Rules
 
@@ -106,6 +117,8 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
+
+       
     }
 }
         #endregion
