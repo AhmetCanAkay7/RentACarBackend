@@ -20,9 +20,9 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
-        public IResult Delete(Rental entity)
+        public IResult Delete(Rental rental)
         {
-            _rentalDal.Delete(entity);
+            _rentalDal.Delete(rental);
             return new SuccessResult(Messages<Rental>.EntityDeleted);
         }
 
@@ -31,25 +31,25 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(),Messages<Rental>.EntityListed);
         }
 
-        public IDataResult<Rental> GetById(int entityId)
+        public IDataResult<Rental> GetById(int rentalId)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r=>r.RentalId==entityId));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r=>r.RentalId== rentalId));
         }
 
-        public IResult Insert(Rental entity)
+        public IResult Insert(Rental rental)
         {
-            if (entity.ReturnDate==null) 
+            if (rental.ReturnDate==null) 
             {
                 return new ErrorResult("Araç kiralama başarısız.");
             }
-            _rentalDal.Insert(entity);
+            _rentalDal.Insert(rental);
             return new SuccessResult("Kiralama işlemi başarılı.");
 
         }
 
-        public IResult Update(Rental entity)
+        public IResult Update(Rental rental)
         {
-            _rentalDal.Update(entity);
+            _rentalDal.Update(rental);
             return new SuccessResult(Messages<Rental>.EntityUpdated);
         }
     }

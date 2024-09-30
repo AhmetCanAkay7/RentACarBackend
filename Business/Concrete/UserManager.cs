@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,9 +20,9 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public IResult Delete(User entity)
+        public IResult Delete(User user)
         {
-            _userDal.Delete(entity);
+            _userDal.Delete(user);
             return new SuccessResult(Messages<User>.EntityDeleted);
         }
 
@@ -37,24 +38,39 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<User> GetById(int entityId)
+        public IDataResult<User> GetById(int userId)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u=> u.UserId==entityId));
+            return new SuccessDataResult<User>(_userDal.Get(u=> u.Id== userId));
         }
 
-        public IResult Insert(User entity)
+        public IDataResult<User> GetByMail(string email)
+        {
+            var data = _userDal.Get(u => u.Email==email);
+            if (data==null)
+            {
+                return new ErrorDataResult<User>();
+            }
+            return new SuccessDataResult<User>(data,Messages<User>.EntityListed);
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+        }
+
+        public IResult Insert(User user)
         {
             if (DateTime.Now.Hour==21)
             {
                 return new ErrorResult(Messages<User>.EntityNotAdded);
             }
-            _userDal.Insert(entity);
+            _userDal.Insert(user);
             return new SuccessResult(Messages<User>.EntityAdded);
         }
 
-        public IResult Update(User entity)
+        public IResult Update(User user)
         {
-            _userDal.Update(entity);
+            _userDal.Update(user);
             return new SuccessResult(Messages<User>.EntityUpdated);
         }
     }

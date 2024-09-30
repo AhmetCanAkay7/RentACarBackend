@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,14 @@ namespace Business.Constants
         public static string MaintenanceTime = "We are in Maintenance time!";
         public static string EntityListed = $"{typeof(T).Name}'s are listed!";
         public static string EntityNotListed = $"{typeof(T).Name}'s could not be listed!";
-        internal static string CarNameAlreadyExists = "Car Name Already exists.";
-        internal static string CarCountOfBrandError="Bir markanın en fazla 10 adet arabası olabilir.";
-        internal static string CarImagesLimitExceeded="Bir arabanın en fazla 5 resmi olabilir.";
+        public static string CarNameAlreadyExists = "Car Name Already exists.";
+        public static string CarCountOfBrandError="Bir markanın en fazla 10 adet arabası olabilir.";
+        public static string CarImagesLimitExceeded="Bir arabanın en fazla 5 resmi olabilir.";
+        public static string UserNotFound="Kullanıcı bulunamadı!";
+        public static string PasswordError="Girilen şifre hatalı!";
+        public static string SuccessfulLogin="Giriş başarılı.";
+        public static string UserAlreadyExists="Kullanıcı zaten mevcut.";
+        public static string UserRegistered="Kullanıcı kayıt edildi.";
+        public static string AccessTokenCreated="Erişim jetonu oluşturuldu.";
     }
 }
